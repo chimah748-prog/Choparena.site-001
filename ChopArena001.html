@@ -1,0 +1,1316 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChopArena — 1v1 Esports Wagering | Play, Prove, Get Paid</title>
+  <meta name="description" content="ChopArena is Nigeria’s 1v1 esports wagering arena. Lock stakes in Naira, prove results with screenshots, and receive instant payouts." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cyan: #06b6d4;
+      --neon: #10b981;
+      --violet: #8b5cf6;
+      --accent: #f59e0b;
+      --naira: #22c55e;
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      background: #07070d;
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.025em;
+    }
+
+    .bg-grid {
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(139, 92, 246, 0.22), transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(6, 182, 212, 0.20), transparent 40%),
+        radial-gradient(circle at 50% 70%, rgba(16, 185, 129, 0.12), transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: auto, auto, auto, 44px 44px, 44px 44px;
+    }
+
+    .glass {
+      background: rgba(15, 15, 26, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card {
+      background: linear-gradient(135deg, rgba(25, 25, 42, 0.65) 0%, rgba(14, 14, 25, 0.85) 100%);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -12px rgba(6, 182, 212, 0.2);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #22d3ee 0%, #a855f7 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gradient-gold {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .glow-btn {
+      position: relative;
+      background: linear-gradient(100deg, #06b6d4, #8b5cf6);
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.4), 0 0 44px rgba(6, 182, 212, 0.2);
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .glow-btn:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 0 34px rgba(139, 92, 246, 0.6), 0 0 60px rgba(6, 182, 212, 0.35);
+    }
+
+    .glow-naira {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+    }
+
+    .ring-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      transition: all 0.2s ease;
+    }
+
+    .ring-btn:hover {
+      border-color: #22d3ee;
+      background: rgba(6, 182, 212, 0.1);
+      color: #22d3ee;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 12px #ef4444;
+      animation: pulseLive 1.4s infinite ease-in-out;
+    }
+
+    .verified-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulseLive 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseLive {
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.35;
+        transform: scale(1.35);
+      }
+    }
+
+    .phone-container {
+      perspective: 1200px;
+    }
+
+    .phone {
+      width: 300px;
+      height: 600px;
+      background: linear-gradient(165deg, #1c1c2e, #0c0c16);
+      border-radius: 44px;
+      padding: 13px;
+      box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.12), inset 0 0 0 1.5px rgba(255, 255, 255, 0.06);
+      position: relative;
+    }
+
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 22px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 30;
+      box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 34px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #090913;
+      position: relative;
+      scrollbar-width: none;
+    }
+
+    .phone-screen::-webkit-scrollbar {
+      display: none;
+    }
+
+    .custom-input {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #fff;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .custom-input:focus {
+      outline: none;
+      border-color: #22d3ee;
+      background: rgba(34, 211, 238, 0.04);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.18);
+    }
+
+    .custom-input::placeholder {
+      color: #64748b;
+    }
+
+    .code-slot {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px dashed rgba(6, 182, 212, 0.6);
+      letter-spacing: 0.18em;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    .bracket-line {
+      position: relative;
+    }
+
+    .bracket-line::after {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 28px;
+      bottom: -10px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(34, 211, 238, 0.7), rgba(139, 92, 246, 0.2));
+    }
+
+    .ticker-fade {
+      animation: tickerFade 0.5s ease;
+    }
+
+    @keyframes tickerFade {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .screen-gradient {
+      background:
+        linear-gradient(135deg, rgba(34, 211, 238, 0.16), transparent 30%),
+        linear-gradient(315deg, rgba(139, 92, 246, 0.16), transparent 30%),
+        #111122;
+    }
+
+    .result-thumb {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(160deg, rgba(34, 211, 238, 0.18), rgba(139, 92, 246, 0.18));
+      background-size: 18px 18px, 18px 18px, auto;
+    }
+  </style>
+</head>
+<body class="bg-grid selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- TOP MARQUEE / STATUS BAR -->
+  <div class="bg-emerald-950/40 border-b border-emerald-500/20 text-xs py-2 px-4 text-emerald-300 font-mono">
+    <div class="max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span class="font-semibold text-emerald-200">NAIRA INSTANT PAYOUTS:</span>
+        <span class="hidden sm:inline text-white/70">OPay, PalmPay, Moniepoint &amp; all Nigerian commercial banks connected (avg. transfer: 42s)</span>
+      </div>
+      <div class="flex items-center gap-4 text-white/60">
+        <span class="hidden md:inline">24/7 Escrow Hold Active</span>
+        <span class="text-emerald-400 font-bold">₦14,840,500 Paid Out Today</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#07070d]/80 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="#" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 via-emerald-400 to-purple-600 p-[2px] transition-transform group-hover:scale-105">
+            <div class="w-full h-full rounded-[10px] bg-[#07070d] flex items-center justify-center font-display font-bold text-lg gradient-text">CA</div>
+          </div>
+          <div class="leading-tight">
+            <p class="font-display font-bold text-lg text-white">ChopArena</p>
+            <p class="text-[10px] uppercase tracking-[0.28em] text-cyan-300/80">Play • Prove • Paid</p>
+          </div>
+        </a>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#how-it-works" class="hover:text-cyan-300 transition">How It Works</a>
+        <a href="#games" class="hover:text-cyan-300 transition">Games</a>
+        <a href="#arena" class="hover:text-cyan-300 transition">Arena</a>
+        <a href="#tournaments" class="hover:text-cyan-300 transition">Tournaments</a>
+        <a href="#rules" class="hover:text-cyan-300 transition">Rules &amp; Fees</a>
+        <a href="#trust" class="hover:text-cyan-300 transition">Trust</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#register" class="hidden sm:inline-flex ring-btn rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200">Sign In</a>
+        <a href="#register" class="glow-btn rounded-xl px-4 py-2.5 text-sm font-bold text-white">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO WITH LIVE SCOREBOARD -->
+    <section class="relative overflow-hidden">
+      <div class="pointer-events-none absolute -top-24 right-0 w-[38rem] h-[38rem] rounded-full bg-cyan-500/10 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-32 left-0 w-[34rem] h-[34rem] rounded-full bg-violet-500/10 blur-3xl"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16 grid lg:grid-cols-2 gap-12 items-center relative">
+        <div>
+          <div class="inline-flex items-center gap-3 rounded-full glass px-4 py-2 mb-6">
+            <span class="live-dot"></span>
+            <span class="text-sm font-semibold text-slate-200">Live 1v1 matches • Escrow-secured • Nigerian Naira</span>
+          </div>
+
+          <h1 class="font-display text-4xl sm:text-5xl xl:text-6xl font-bold leading-[1.04] text-white">
+            Play your match,<br />
+            <span class="gradient-text">prove your win</span>,<br />
+            get paid in ₦.
+          </h1>
+
+          <p class="mt-6 text-slate-300/90 text-base sm:text-lg leading-7 max-w-xl">
+            ChopArena locks both stakes in escrow, issues a match code, cross-checks two screenshots, and releases the payout to the winner. No stories. No delays. Just proof.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#register" class="glow-btn rounded-2xl px-6 py-4 font-bold text-white">Create a ₦ Match</a>
+            <a href="#tournaments" class="ring-btn rounded-2xl px-6 py-4 font-bold text-slate-100">View Tournaments</a>
+          </div>
+
+          <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-xl">
+            <div class="glass rounded-2xl p-4">
+              <p class="text-xs text-slate-400">Paid Today</p>
+              <p class="font-display font-bold text-xl text-emerald-400">₦14.8M</p>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <p class="text-xs text-slate-400">Avg. Payout</p>
+              <p class="font-display font-bold text-xl text-cyan-300">42s</p>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <p class="text-xs text-slate-400">Live Matches</p>
+              <p class="font-display font-bold text-xl text-violet-300">1,284</p>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <p class="text-xs text-slate-400">Escrow Status</p>
+              <p class="font-display font-bold text-xl text-white">Active</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -inset-4 bg-gradient-to-tr from-cyan-500/20 via-transparent to-violet-500/20 blur-3xl rounded-[3rem]"></div>
+
+          <div class="glass-card rounded-[2rem] p-5 sm:p-7 relative">
+            <div class="flex items-center justify-between gap-4 mb-6">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="live-dot"></span>
+                  <p class="text-xs uppercase tracking-[0.24em] text-red-300 font-bold">Live 1v1 Scorecard</p>
+                </div>
+                <p class="font-display text-xl sm:text-2xl font-bold text-white mt-2">Dream League Soccer 2026</p>
+                <p class="text-sm text-slate-400">Match ID: CHOP-DLS-88412 • Lagos Server</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xs text-slate-400">Screenshot Window</p>
+                <p id="matchTimer" class="font-display text-2xl font-bold text-cyan-300">04:12</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+              <div class="glass rounded-2xl p-4 text-center">
+                <div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-tr from-cyan-400 to-blue-600 flex items-center justify-center font-display font-bold text-white">T</div>
+                <p class="mt-3 font-semibold text-white">Tunde_FC</p>
+                <p class="text-xs text-slate-400">DLS ID: 884-2210</p>
+                <p id="scoreA" class="font-display text-4xl font-bold text-white mt-3">2</p>
+                <p class="mt-2 inline-flex items-center gap-2 text-[11px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1"><span class="verified-dot"></span> Ready</p>
+              </div>
+
+              <div class="text-center px-1">
+                <p class="font-display text-2xl font-bold text-slate-400">VS</p>
+                <p class="mt-3 text-xs text-slate-500 leading-4">Escrow<br />Locked</p>
+                <div class="mt-3 w-10 h-10 mx-auto rounded-full border border-emerald-400/30 bg-emerald-500/10 flex items-center justify-center text-emerald-300">₦</div>
+              </div>
+
+              <div class="glass rounded-2xl p-4 text-center">
+                <div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-tr from-violet-400 to-fuchsia-600 flex items-center justify-center font-display font-bold text-white">K</div>
+                <p class="mt-3 font-semibold text-white">Klevus</p>
+                <p class="text-xs text-slate-400">DLS ID: 772-9051</p>
+                <p id="scoreB" class="font-display text-4xl font-bold text-white mt-3">1</p>
+                <p class="mt-2 inline-flex items-center gap-2 text-[11px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1"><span class="verified-dot"></span> Ready</p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-3 mt-6">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Stake Each</p>
+                <p class="font-display text-lg font-bold text-white">₦2,500</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Total Locked</p>
+                <p class="font-display text-lg font-bold text-white">₦5,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Winner Receives</p>
+                <p class="font-display text-lg font-bold text-emerald-400">₦4,500</p>
+                <p class="text-[11px] text-slate-500 mt-1">After 10% ChopArena fee</p>
+              </div>
+            </div>
+
+            <div class="mt-6 glass rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <p id="liveTicker" class="ticker-fade text-sm text-slate-300">Escrow confirmed for Tunde_FC vs Klevus — ₦5,000 locked.</p>
+              <span class="text-xs font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1 whitespace-nowrap">Proof Required: 2 Screenshots</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="py-20 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm uppercase tracking-[0.3em] text-cyan-300 font-bold">How ChopArena Works</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">From registration to payout in four clean steps</h2>
+          <p class="text-slate-400 mt-4 leading-7">
+            Every 1v1 lock-in is protected by escrow and verified with two cross-checked screenshots. ChopArena keeps 10% of every one-on-one lock-in stake. For tournaments, ChopArena keeps 20% of the total entry fee pool before prize payout.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center font-display text-cyan-300 font-bold text-lg">01</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Register &amp; Verify</h3>
+            <p class="text-slate-400 mt-3 leading-7 text-sm">
+              Create your ChopArena profile with your username, mobile money phone number, email, and game IDs. Verification links your payout channel.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-slate-300">
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Phone for OPay / PalmPay / Moniepoint</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Email confirmation</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> 18+ eligibility confirmation</li>
+            </ul>
+          </article>
+
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-violet-500/15 border border-violet-400/25 flex items-center justify-center font-display text-violet-300 font-bold text-lg">02</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Set a Stake</h3>
+            <p class="text-slate-400 mt-3 leading-7 text-sm">
+              Choose your game and stake amount in Nigerian Naira. Both players lock the same stake before the match begins.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-slate-300">
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Stake shown in ₦</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> 10% platform fee on each locked stake</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Escrow holds funds until proof</li>
+            </ul>
+          </article>
+
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center font-display text-emerald-300 font-bold text-lg">03</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Get a Match Code</h3>
+            <p class="text-slate-400 mt-3 leading-7 text-sm">
+              ChopArena generates a unique match code. Both players enter the same code on-device and confirm ready status before kickoff.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-slate-300">
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Unique code prevents wrong opponent claims</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Ready status visible for both players</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Match timer and escrow state tracked</li>
+            </ul>
+          </article>
+
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/25 flex items-center justify-center font-display text-amber-300 font-bold text-lg">04</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Upload &amp; Get Paid</h3>
+            <p class="text-slate-400 mt-3 leading-7 text-sm">
+              After the match, both players upload screenshots. ChopArena cross-checks the two proofs and releases the payout to the winner.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm text-slate-300">
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Two screenshots required</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Score, time, and match code compared</li>
+              <li class="flex gap-2"><span class="text-emerald-400">✓</span> Winner paid in ₦ after 10% fee</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <section id="games" class="py-20 bg-black/20 border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div class="max-w-2xl">
+            <p class="text-sm uppercase tracking-[0.3em] text-violet-300 font-bold">Supported Games</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Built for Nigeria’s most competitive mobile titles</h2>
+            <p class="text-slate-400 mt-4 leading-7">
+              Stake ranges are shown in Nigerian Naira. All matches require escrow lock-in, match code confirmation, and screenshot proof.
+            </p>
+          </div>
+          <div class="glass rounded-2xl px-5 py-4">
+            <p class="text-xs text-slate-400">1v1 Platform Fee</p>
+            <p class="font-display text-xl font-bold text-emerald-400">10% of every locked stake</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 mt-10">
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold text-white">Dream League Soccer 2026</h3>
+                <p class="text-sm text-slate-400 mt-2">Online friendly • 1v1 • 6–10 minute match length</p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-2xl">⚽</div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-3 mt-7">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Typical Stake Range</p>
+                <p class="font-display text-lg font-bold text-white mt-1">₦500 – ₦25,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Proof Required</p>
+                <p class="font-display text-lg font-bold text-white mt-1">Final score screen</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Best For</p>
+                <p class="font-display text-lg font-bold text-white mt-1">Fast payout duels</p>
+              </div>
+            </div>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Screenshot must show final score, player names, and match time where visible.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Both players must upload before escrow release.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Example: ₦2,000 each → ₦4,000 locked → ₦400 fee → winner receives ₦3,600.</li>
+            </ul>
+          </article>
+
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold text-white">Call of Duty Mobile</h3>
+                <p class="text-sm text-slate-400 mt-2">1v1 duel • sniper / rifle / custom rules • scoreboard proof</p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center text-2xl">🎯</div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-3 mt-7">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Typical Stake Range</p>
+                <p class="font-display text-lg font-bold text-white mt-1">₦1,000 – ₦50,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Proof Required</p>
+                <p class="font-display text-lg font-bold text-white mt-1">Final scoreboard</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Best For</p>
+                <p class="font-display text-lg font-bold text-white mt-1">High-stake duels</p>
+              </div>
+            </div>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Screenshot must show final kills, scoreboard names, and result screen.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Match code must be visible or referenced in dispute review.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Example: ₦10,000 each → ₦20,000 locked → ₦2,000 fee → winner receives ₦18,000.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHONE MOCKUPS -->
+    <section id="arena" class="py-24 relative overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="text-sm uppercase tracking-[0.3em] text-cyan-300 font-bold">Inside the ChopArena App</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Three screens. One clean payout loop.</h2>
+          <p class="text-slate-400 mt-4 leading-7">
+            Dashboard wallet, match code confirmation, and screenshot result payout — all designed for fast mobile play in Nigeria.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-10 mt-14 items-start justify-items-center">
+          <!-- PHONE 1: DASHBOARD -->
+          <div class="phone-container">
+            <div class="phone">
+              <div class="phone-screen p-4 pt-12">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <p class="text-[11px] text-slate-500">ChopArena Dashboard</p>
+                    <p class="font-display font-bold text-white">Wallet &amp; Challenges</p>
+                  </div>
+                  <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-400 to-cyan-500 flex items-center justify-center text-sm font-bold text-black">D</div>
+                </div>
+
+                <div class="screen-gradient rounded-3xl border border-white/10 p-4 glow-naira">
+                  <p class="text-[11px] text-slate-400">Available Balance</p>
+                  <p class="font-display text-3xl font-bold text-white mt-1">₦18,450.75</p>
+                  <div class="grid grid-cols-2 gap-2 mt-4">
+                    <button class="rounded-xl bg-emerald-500 text-black text-xs font-bold py-2.5">Deposit</button>
+                    <button class="rounded-xl bg-white/10 border border-white/15 text-white text-xs font-bold py-2.5">Withdraw</button>
+                  </div>
+                  <p class="text-[10px] text-slate-400 mt-3">Payout channel: OPay • 0803 ••• 4421</p>
+                </div>
+
+                <p class="text-[11px] uppercase tracking-[0.24em] text-slate-500 mt-5 mb-3">Active Challenges</p>
+
+                <div class="space-y-3">
+                  <div class="glass rounded-2xl p-3">
+                    <div class="flex items-center justify-between gap-2">
+                      <div>
+                        <p class="text-sm font-bold text-white">vs Buju_B</p>
+                        <p class="text-[11px] text-slate-400">DLS 2026 • Code CHOP-7712</p>
+                      </div>
+                      <p class="text-sm font-bold text-emerald-400">₦2,000</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-3">
+                      <span class="text-[10px] bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 rounded-full px-2 py-1">Ready</span>
+                      <span class="text-[10px] text-slate-400">Winner gets ₦3,600</span>
+                    </div>
+                  </div>
+
+                  <div class="glass rounded-2xl p-3">
+                    <div class="flex items-center justify-between gap-2">
+                      <div>
+                        <p class="text-sm font-bold text-white">vs Zaza_K</p>
+                        <p class="text-[11px] text-slate-400">COD Mobile • Code CHOP-9140</p>
+                      </div>
+                      <p class="text-sm font-bold text-cyan-300">₦5,000</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-3">
+                      <span class="text-[10px] bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded-full px-2 py-1">Waiting</span>
+                      <span class="text-[10px] text-slate-400">Winner gets ₦9,000</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="text-[11px] uppercase tracking-[0.24em] text-slate-500 mt-5 mb-3">Recent Payouts</p>
+                <div class="space-y-2">
+                  <div class="glass rounded-2xl px-3 py-2.5 flex items-center justify-between">
+                    <p class="text-xs text-slate-300">DLS win vs Dreyy</p>
+                    <p class="text-xs font-bold text-emerald-400">+₦4,500</p>
+                  </div>
+                  <div class="glass rounded-2xl px-3 py-2.5 flex items-center justify-between">
+                    <p class="text-xs text-slate-300">CODM win vs BigRex</p>
+                    <p class="text-xs font-bold text-emerald-400">+₦18,000</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHONE 2: MATCH CODE -->
+          <div class="phone-container lg:translate-y-8">
+            <div class="phone">
+              <div class="phone-screen p-4 pt-12">
+                <div class="text-center mb-4">
+                  <p class="text-[11px] text-slate-500">Match Code Screen</p>
+                  <p class="font-display font-bold text-white">DLS 2026 • ₦2,000 Each</p>
+                </div>
+
+                <div class="screen-gradient rounded-3xl border border-white/10 p-4 text-center">
+                  <p class="text-[11px] text-slate-400">Enter this code on both devices</p>
+                  <div class="grid grid-cols-4 gap-2 mt-3">
+                    <div class="code-slot rounded-xl py-3 text-cyan-300 font-bold">C</div>
+                    <div class="code-slot rounded-xl py-3 text-cyan-300 font-bold">H</div>
+                    <div class="code-slot rounded-xl py-3 text-cyan-300 font-bold">O</div>
+                    <div class="code-slot rounded-xl py-3 text-cyan-300 font-bold">P</div>
+                  </div>
+                  <div class="grid grid-cols-4 gap-2 mt-2">
+                    <div class="code-slot rounded-xl py-3 text-emerald-300 font-bold">8</div>
+                    <div class="code-slot rounded-xl py-3 text-emerald-300 font-bold">3</div>
+                    <div class="code-slot rounded-xl py-3 text-emerald-300 font-bold">9</div>
+                    <div class="code-slot rounded-xl py-3 text-emerald-300 font-bold">0</div>
+                  </div>
+                  <p class="text-[10px] text-slate-500 mt-3">Match code locks opponent identity and escrow record.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-4">
+                  <div class="glass rounded-2xl p-3 text-center">
+                    <p class="text-[11px] text-slate-400">You</p>
+                    <p class="text-sm font-bold text-white mt-1">Dreydon</p>
+                    <span class="inline-flex items-center gap-1 mt-2 text-[10px] bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 rounded-full px-2 py-1"><span class="verified-dot"></span> Ready</span>
+                  </div>
+                  <div class="glass rounded-2xl p-3 text-center">
+                    <p class="text-[11px] text-slate-400">Opponent</p>
+                    <p class="text-sm font-bold text-white mt-1">Buju_B</p>
+                    <span class="inline-flex items-center gap-1 mt-2 text-[10px] bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 rounded-full px-2 py-1"><span class="verified-dot"></span> Ready</span>
+                  </div>
+                </div>
+
+                <div class="glass rounded-2xl p-4 mt-4">
+                  <div class="flex justify-between text-xs mb-2">
+                    <span class="text-slate-400">Locked Stake Each</span>
+                    <span class="text-white font-bold">₦2,000</span>
+                  </div>
+                  <div class="flex justify-between text-xs mb-2">
+                    <span class="text-slate-400">Total Locked</span>
+                    <span class="text-white font-bold">₦4,000</span>
+                  </div>
+                  <div class="flex justify-between text-xs mb-2">
+                    <span class="text-slate-400">ChopArena Fee (10%)</span>
+                    <span class="text-amber-300 font-bold">₦400</span>
+                  </div>
+                  <div class="h-px bg-white/10 my-2"></div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-slate-300 font-semibold">Winner Receives</span>
+                    <span class="text-emerald-400 font-bold">₦3,600</span>
+                  </div>
+                </div>
+
+                <button class="w-full mt-4 glow-btn rounded-2xl py-3.5 text-sm font-bold text-white">Start Match</button>
+                <p class="text-center text-[10px] text-slate-500 mt-3">Both players must confirm ready before escrow becomes active.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHONE 3: RESULT / PAYOUT -->
+          <div class="phone-container">
+            <div class="phone">
+              <div class="phone-screen p-4 pt-12">
+                <div class="text-center mb-4">
+                  <p class="text-[11px] text-slate-500">Result &amp; Payout</p>
+                  <p class="font-display font-bold text-white">Cross-Check Complete</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="result-thumb rounded-2xl h-36 p-2 flex flex-col justify-between">
+                    <span class="text-[9px] bg-black/40 border border-white/10 rounded-full px-2 py-1 w-max">Player A</span>
+                    <div>
+                      <p class="font-display text-lg font-bold text-white">3 - 2</p>
+                      <p class="text-[9px] text-slate-300">Final score • DLS 2026</p>
+                    </div>
+                  </div>
+                  <div class="result-thumb rounded-2xl h-36 p-2 flex flex-col justify-between">
+                    <span class="text-[9px] bg-black/40 border border-white/10 rounded-full px-2 py-1 w-max">Player B</span>
+                    <div>
+                      <p class="font-display text-lg font-bold text-white">2 - 3</p>
+                      <p class="text-[9px] text-slate-300">Final score • DLS 2026</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="glass rounded-2xl p-3 mt-3">
+                  <p class="text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2">Verification Checks</p>
+                  <div class="space-y-2 text-[11px]">
+                    <p class="flex justify-between text-slate-300"><span>Match code</span><span class="text-emerald-400 font-bold">Matched</span></p>
+                    <p class="flex justify-between text-slate-300"><span>Score alignment</span><span class="text-emerald-400 font-bold">Matched</span></p>
+                    <p class="flex justify-between text-slate-300"><span>Timestamp window</span><span class="text-emerald-400 font-bold">Valid</span></p>
+                    <p class="flex justify-between text-slate-300"><span>Opponent ID</span><span class="text-emerald-400 font-bold">Confirmed</span></p>
+                  </div>
+                </div>
+
+                <div class="screen-gradient rounded-3xl border border-emerald-400/20 p-4 mt-3">
+                  <p class="text-[11px] text-slate-400">Payout Confirmation</p>
+                  <p class="font-display text-2xl font-bold text-emerald-400 mt-1">₦3,600 Paid</p>
+                  <div class="mt-3 space-y-2 text-[11px] text-slate-300">
+                    <p class="flex justify-between"><span>Total Locked</span><span class="text-white font-bold">₦4,000</span></p>
+                    <p class="flex justify-between"><span>ChopArena Fee (10%)</span><span class="text-white font-bold">₦400</span></p>
+                    <p class="flex justify-between"><span>Destination</span><span class="text-white font-bold">OPay Wallet</span></p>
+                    <p class="flex justify-between"><span>Status</span><span class="text-emerald-400 font-bold">Escrow Released</span></p>
+                  </div>
+                </div>
+
+                <div class="glass rounded-2xl px-3 py-3 mt-3 flex items-center justify-between gap-3">
+                  <p class="text-[11px] text-slate-400">Need help with this result?</p>
+                  <a href="#disputes" class="text-[11px] font-bold text-cyan-300 hover:text-cyan-200">Open Dispute</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOURNAMENTS -->
+    <section id="tournaments" class="py-20 bg-black/20 border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div class="max-w-2xl">
+            <p class="text-sm uppercase tracking-[0.3em] text-amber-300 font-bold">Tournaments</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Bracket cups with clear entry fees and prize pools</h2>
+            <p class="text-slate-400 mt-4 leading-7">
+              For every tournament hosted in every bracket, ChopArena keeps 20% of the whole entry fee pool before paying the prize.
+            </p>
+          </div>
+          <div class="glass rounded-2xl px-5 py-4">
+            <p class="text-xs text-slate-400">Tournament Platform Fee</p>
+            <p class="font-display text-xl font-bold text-amber-400">20% of total entry fees</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 mt-10">
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1 w-max">DLS Cup</p>
+                <h3 class="font-display text-2xl font-bold text-white mt-4">Abuja Green Bracket</h3>
+                <p class="text-sm text-slate-400 mt-2">Dream League Soccer 2026 • Single elimination</p>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-xl">🏆</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-7">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Entry Fee</p>
+                <p class="font-display text-xl font-bold text-white mt-1">₦1,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Players</p>
+                <p class="font-display text-xl font-bold text-white mt-1">32 / 64</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Current Entry Pool</p>
+                <p class="font-display text-xl font-bold text-white mt-1">₦32,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Prize After 20% Fee</p>
+                <p class="font-display text-xl font-bold text-emerald-400 mt-1">₦25,600</p>
+              </div>
+            </div>
+
+            <div class="mt-7 space-y-3">
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center text-[11px] text-cyan-300">R32</span>
+                <p class="text-sm text-slate-300">Round of 32 • Live match code issued</p>
+              </div>
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-violet-500/15 border border-violet-400/25 flex items-center justify-center text-[11px] text-violet-300">QF</span>
+                <p class="text-sm text-slate-300">Quarterfinals • Dual screenshot proof</p>
+              </div>
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-[11px] text-emerald-300">SF</span>
+                <p class="text-sm text-slate-300">Semifinals • Escrow verified per round</p>
+              </div>
+              <div class="pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-amber-500/15 border border-amber-400/25 flex items-center justify-center text-[11px] text-amber-300">F</span>
+                <p class="text-sm text-slate-300">Final • Prize paid after 20% platform fee</p>
+              </div>
+            </div>
+
+            <button class="w-full mt-7 glow-btn rounded-2xl py-3.5 font-bold text-white">Register for ₦1,000</button>
+          </article>
+
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-bold text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1 w-max">CODM Duel</p>
+                <h3 class="font-display text-2xl font-bold text-white mt-4">Lagos Sniper Cup</h3>
+                <p class="text-sm text-slate-400 mt-2">Call of Duty Mobile • 1v1 sniper rules</p>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center text-xl">🎯</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-7">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Entry Fee</p>
+                <p class="font-display text-xl font-bold text-white mt-1">₦2,500</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Players</p>
+                <p class="font-display text-xl font-bold text-white mt-1">16 / 16</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Total Entry Pool</p>
+                <p class="font-display text-xl font-bold text-white mt-1">₦40,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Prize After 20% Fee</p>
+                <p class="font-display text-xl font-bold text-emerald-400 mt-1">₦32,000</p>
+              </div>
+            </div>
+
+            <div class="mt-7 space-y-3">
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center text-[11px] text-cyan-300">R16</span>
+                <p class="text-sm text-slate-300">Round of 16 • Custom room code issued</p>
+              </div>
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-violet-500/15 border border-violet-400/25 flex items-center justify-center text-[11px] text-violet-300">QF</span>
+                <p class="text-sm text-slate-300">Quarterfinals • Scoreboard screenshot proof</p>
+              </div>
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-[11px] text-emerald-300">SF</span>
+                <p class="text-sm text-slate-300">Semifinals • Admin review on mismatch</p>
+              </div>
+              <div class="pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-amber-500/15 border border-amber-400/25 flex items-center justify-center text-[11px] text-amber-300">F</span>
+                <p class="text-sm text-slate-300">Final • ₦32,000 prize paid after fee</p>
+              </div>
+            </div>
+
+            <button class="w-full mt-7 glow-btn rounded-2xl py-3.5 font-bold text-white">Join Full Bracket</button>
+          </article>
+
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-bold text-violet-300 bg-violet-500/10 border border-violet-500/20 rounded-full px-3 py-1 w-max">Mega Bracket</p>
+                <h3 class="font-display text-2xl font-bold text-white mt-4">Weekend Naija Clash</h3>
+                <p class="text-sm text-slate-400 mt-2">Mixed title • DLS 2026 &amp; COD Mobile</p>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-violet-500/15 border border-violet-400/25 flex items-center justify-center text-xl">🔥</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-7">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Entry Fee</p>
+                <p class="font-display text-xl font-bold text-white mt-1">₦5,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Players</p>
+                <p class="font-display text-xl font-bold text-white mt-1">48 / 64</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Projected Entry Pool</p>
+                <p class="font-display text-xl font-bold text-white mt-1">₦320,000</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-xs text-slate-400">Prize After 20% Fee</p>
+                <p class="font-display text-xl font-bold text-emerald-400 mt-1">₦256,000</p>
+              </div>
+            </div>
+
+            <div class="mt-7 space-y-3">
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center text-[11px] text-cyan-300">R64</span>
+                <p class="text-sm text-slate-300">Open qualifiers • Match code per fixture</p>
+              </div>
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-violet-500/15 border border-violet-400/25 flex items-center justify-center text-[11px] text-violet-300">R32</span>
+                <p class="text-sm text-slate-300">Main bracket • Escrow enforced per match</p>
+              </div>
+              <div class="bracket-line pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-[11px] text-emerald-300">R8</span>
+                <p class="text-sm text-slate-300">Elite bracket • Priority dispute review</p>
+              </div>
+              <div class="pl-8 relative">
+                <span class="absolute left-0 top-0 w-6 h-6 rounded-lg bg-amber-500/15 border border-amber-400/25 flex items-center justify-center text-[11px] text-amber-300">F</span>
+                <p class="text-sm text-slate-300">Grand final • ₦256,000 prize pool</p>
+              </div>
+            </div>
+
+            <button class="w-full mt-7 glow-btn rounded-2xl py-3.5 font-bold text-white">Enter Weekend Cup</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RULES & FEES -->
+    <section id="rules" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm uppercase tracking-[0.3em] text-emerald-300 font-bold">Rules &amp; Fees</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Clear ChopArena revenue rules, no hidden deductions</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 mt-10">
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center font-display text-emerald-300 font-bold text-lg">10%</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">1v1 Lock-In Stake Fee</h3>
+            <p class="text-slate-400 mt-3 leading-7 text-sm">
+              ChopArena keeps 10% of every one-on-one lock-in stake. The fee is calculated on the locked stake before the winner is paid.
+            </p>
+            <div class="glass rounded-2xl p-4 mt-5 text-sm">
+              <p class="flex justify-between mb-2"><span class="text-slate-400">Player A locks</span><span class="text-white font-bold">₦2,000</span></p>
+              <p class="flex justify-between mb-2"><span class="text-slate-400">Player B locks</span><span class="text-white font-bold">₦2,000</span></p>
+              <p class="flex justify-between mb-2"><span class="text-slate-400">Total locked</span><span class="text-white font-bold">₦4,000</span></p>
+              <p class="flex justify-between mb-2"><span class="text-slate-400">ChopArena fee (10%)</span><span class="text-amber-300 font-bold">₦400</span></p>
+              <p class="flex justify-between"><span class="text-slate-300 font-semibold">Winner receives</span><span class="text-emerald-400 font-bold">₦3,600</span></p>
+            </div>
+          </article>
+
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/25 flex items-center justify-center font-display text-amber-300 font-bold text-lg">20%</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Tournament Bracket Fee</h3>
+            <p class="text-slate-400 mt-3 leading-7 text-sm">
+              For every tournament hosted in every bracket, ChopArena keeps 20% of the whole entry fee pool after fully calculating all entry fees. The prize is paid only after this 20% deduction.
+            </p>
+            <div class="glass rounded-2xl p-4 mt-5 text-sm">
+              <p class="flex justify-between mb-2"><span class="text-slate-400">32 players × ₦1,000</span><span class="text-white font-bold">₦32,000</span></p>
+              <p class="flex justify-between mb-2"><span class="text-slate-400">Total entry fee pool</span><span class="text-white font-bold">₦32,000</span></p>
+              <p class="flex justify-between mb-2"><span class="text-slate-400">ChopArena fee (20%)</span><span class="text-amber-300 font-bold">₦6,400</span></p>
+              <p class="flex justify-between"><span class="text-slate-300 font-semibold">Prize paid out</span><span class="text-emerald-400 font-bold">₦25,600</span></p>
+            </div>
+          </article>
+
+          <article class="glass-card rounded-[2rem] p-7">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center font-display text-cyan-300 font-bold text-lg">✓</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Match Rules</h3>
+            <ul class="text-slate-400 mt-3 leading-7 text-sm space-y-3">
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Both players must confirm the same match code before the match starts.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Escrow is active only when both stakes are locked and both ready statuses are confirmed.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Two screenshots are required: one from each player.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Screenshots must show the final result clearly, with visible names, score, and time where possible.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Payout is released only after cross-check passes.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Any attempted manipulation of screenshots may lead to forfeiture and account restriction.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section id="trust" class="py-20 bg-black/20 border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm uppercase tracking-[0.3em] text-cyan-300 font-bold">Trust &amp; Payout Safety</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Why escrow + two cross-checked screenshots works</h2>
+          <p class="text-slate-400 mt-4 leading-7">
+            ChopArena does not rely on one player’s word. Funds are locked before the match begins, and payout is released only when both proofs align.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-xl">🔐</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Escrow Lock</h3>
+            <p class="text-slate-400 mt-3 text-sm leading-7">
+              Both stakes are held before kickoff. No player can run with the money or deny the match after losing.
+            </p>
+          </article>
+
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center text-xl">📸</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Two-Screenshot Proof</h3>
+            <p class="text-slate-400 mt-3 text-sm leading-7">
+              Each player uploads their own final result screen. The two screenshots are compared for score, names, and time consistency.
+            </p>
+          </article>
+
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-violet-500/15 border border-violet-400/25 flex items-center justify-center text-xl">🧾</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Match Code Trail</h3>
+            <p class="text-slate-400 mt-3 text-sm leading-7">
+              Every match has a unique code. This creates a clean audit trail for opponent identity, stake, and result verification.
+            </p>
+          </article>
+
+          <article class="glass-card rounded-3xl p-6">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/25 flex items-center justify-center text-xl">⚖️</div>
+            <h3 class="font-display text-xl font-bold text-white mt-5">Dispute Path</h3>
+            <p class="text-slate-400 mt-3 text-sm leading-7">
+              If screenshots mismatch, payout is frozen and a structured dispute process begins with evidence review.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISPUTES & REGULATORY CONSIDERATIONS -->
+    <section id="disputes" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-8">
+          <article class="glass-card rounded-[2rem] p-7">
+            <p class="text-sm uppercase tracking-[0.3em] text-red-300 font-bold">Dispute Path</p>
+            <h3 class="font-display text-2xl font-bold text-white mt-3">What happens when screenshots mismatch</h3>
+            <div class="mt-6 space-y-4">
+              <div class="glass rounded-2xl p-4">
+                <p class="text-sm font-bold text-white">1. Payout automatically frozen</p>
+                <p class="text-sm text-slate-400 mt-2">If the two screenshots do not match, ChopArena does not release escrow. Both players are notified immediately.</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-sm font-bold text-white">2. Evidence submission window</p>
+                <p class="text-sm text-slate-400 mt-2">Both players may submit additional proof such as screen recording, full scoreboard, match code confirmation, or device timestamp.</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-sm font-bold text-white">3. Admin cross-check</p>
+                <p class="text-sm text-slate-400 mt-2">ChopArena compares final score, player names, match code, and upload timing. The stronger consistent proof wins the review.</p>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <p class="text-sm font-bold text-white">4. Resolution</p>
+                <p class="text-sm text-slate-400 mt-2">If one side is clearly proven, escrow is released accordingly. If evidence is inconclusive, the match may be voided and stakes returned according to platform policy.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-card rounded-[2rem] p-7">
+            <p class="text-sm uppercase tracking-[0.3em] text-emerald-300 font-bold">Real-Money Wagering Considerations</p>
+            <h3 class="font-display text-2xl font-bold text-white mt-3">Regulatory and responsible play safeguards</h3>
+            <ul class="mt-6 space-y-4 text-sm text-slate-300 leading-7">
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> ChopArena is intended for users aged 18 and above only.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Players must comply with applicable Nigerian laws and local regulations relating to real-money wagering, gaming, and digital payments.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Identity and payout verification may be required to prevent fraud, underage participation, and payment abuse.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> Users should only stake funds they can afford to lose and should set personal limits where available.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> ChopArena may suspend matches, freeze payouts, or restrict accounts where suspicious activity is detected.</li>
+              <li class="flex gap-3"><span class="text-emerald-400">✓</span> The platform fee structure is explicit: 10% for 1v1 lock-in stakes and 20% for tournament entry pools before prize payout.</li>
+            </ul>
+
+            <div class="mt-7 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-4">
+              <p class="text-sm text-amber-200 font-semibold">Responsible gaming notice</p>
+              <p class="text-sm text-amber-100/80 mt-2 leading-7">
+                Competitive wagering should remain entertainment. If play stops being controlled, take a break, set limits, or seek support.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTRATION -->
+    <section id="register" class="py-24 bg-black/20 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+          <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-violet-300 font-bold">Create Your Arena Account</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">Register with your mobile money details and game IDs</h2>
+            <p class="text-slate-400 mt-4 leading-7 max-w-xl">
+              Your phone number connects your payout wallet. Your game IDs link your Dream League Soccer 2026 and Call of Duty Mobile profiles to every match code.
+            </p>
+
+            <div class="grid sm:grid-cols-2 gap-4 mt-8">
+              <div class="glass rounded-2xl p-5">
+                <p class="font-display font-bold text-white">Instant Naira Wallet</p>
+                <p class="text-sm text-slate-400 mt-2">Deposit and withdraw through OPay, PalmPay, Moniepoint, or your Nigerian bank.</p>
+              </div>
+              <div class="glass rounded-2xl p-5">
+                <p class="font-display font-bold text-white">Verified Match Codes</p>
+                <p class="text-sm text-slate-400 mt-2">Every duel gets a unique code to lock opponent identity and payout proof.</p>
+              </div>
+              <div class="glass rounded-2xl p-5">
+                <p class="font-display font-bold text-white">Escrow Protection</p>
+                <p class="text-sm text-slate-400 mt-2">Stakes are held until both screenshot proofs are reviewed and matched.</p>
+              </div>
+              <div class="glass rounded-2xl p-5">
+                <p class="font-display font-bold text-white">Transparent Fees</p>
+                <p class="text-sm text-slate-400 mt-2">10% on 1v1 lock-ins. 20% on tournament entry pools before prize payout.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-[2rem] p-6 sm:p-8">
+            <h3 class="font-display text-2xl font-bold text-white">Join ChopArena</h3>
+            <p class="text-sm text-slate-400 mt-2">All fields are required unless marked optional.</p>
+
+            <form id="registerForm" class="mt-6 space-y-4">
+              <div>
+                <label for="username" class="text-sm font-semibold text-slate-300 mb-2 block">Username</label>
+                <input id="username" type="text" required class="custom-input" placeholder="e.g. Dreydon" />
+              </div>
+
+              <div>
+                <label for="phone" class="text-sm font-semibold text-slate-300 mb-2 block">Phone Number for Mobile Money</label>
+                <input id="phone" type="tel" required class="custom-input" placeholder="e.g. 0803 123 4567" />
+              </div>
+
+              <div>
+                <label for="email" class="text-sm font-semibold text-slate-300 mb-2 block">Email Address</label>
+                <input id="email" type="email" required class="custom-input" placeholder="you@example.com" />
+              </div>
+
+              <div>
+                <label for="password" class="text-sm font-semibold text-slate-300 mb-2 block">Password</label>
+                <input id="password" type="password" required minlength="8" class="custom-input" placeholder="Minimum 8 characters" />
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="dlsId" class="text-sm font-semibold text-slate-300 mb-2 block">Dream League Soccer 2026 ID</label>
+                  <input id="dlsId" type="text" required class="custom-input" placeholder="e.g. 884-2210" />
+                </div>
+                <div>
+                  <label for="codId" class="text-sm font-semibold text-slate-300 mb-2 block">Call of Duty Mobile ID</label>
+                  <input id="codId" type="text" required class="custom-input" placeholder="e.g. 67890123456" />
+                </div>
+              </div>
+
+              <div class="glass rounded-2xl p-4">
+                <label class="flex items-start gap-3 cursor-pointer">
+                  <input id="ageCheck" type="checkbox" required class="mt-1 h-4 w-4 accent-emerald-500" />
+                  <span class="text-sm text-slate-300 leading-6">
+                    I confirm that I am 18 years or older, I understand real-money wagering risks, and I accept ChopArena’s fee rules: 10% on every 1v1 lock-in stake and 20% on tournament entry pools before prize payout.
+                  </span>
+                </label>
+              </div>
+
+              <button type="submit" class="w-full glow-btn rounded-2xl py-4 font-bold text-white">Create Account</button>
+
+              <div id="formToast" class="hidden rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
+                Registration details captured. OTP and KYC verification would continue in the production flow.
+              </div>
+
+              <p class="text-xs text-slate-500 leading-6">
+                By registering, you agree to screenshot verification, escrow terms, dispute review, and responsible gaming policies.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-black/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-10">
+        <div>
+          <a href="#" class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 via-emerald-400 to-purple-600 p-[2px]">
+              <div class="w-full h-full rounded-[10px] bg-[#07070d] flex items-center justify-center font-display font-bold text-lg gradient-text">CA</div>
+            </div>
+            <div class="leading-tight">
+              <p class="font-display font-bold text-lg text-white">ChopArena</p>
+              <p class="text-[10px] uppercase tracking-[0.28em] text-cyan-300/80">Play • Prove • Paid</p>
+            </div>
+          </a>
+          <p class="text-sm text-slate-400 mt-5 leading-7 max-w-sm">
+            Nigeria’s escrow-protected 1v1 esports arena. Lock stakes in Naira, prove results with two screenshots, and get paid.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white">Platform</h4>
+          <div class="mt-4 space-y-3 text-sm text-slate-400">
+            <a href="#how-it-works" class="block hover:text-cyan-300 transition">How It Works</a>
+            <a href="#games" class="block hover:text-cyan-300 transition">Games</a>
+            <a href="#arena" class="block hover:text-cyan-300 transition">App Screens</a>
+            <a href="#tournaments" class="block hover:text-cyan-300 transition">Tournaments</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white">Rules &amp; Safety</h4>
+          <div class="mt-4 space-y-3 text-sm text-slate-400">
+            <a href="#rules" class="block hover:text-cyan-300 transition">Fees &amp; Rules</a>
+            <a href="#trust" class="block hover:text-cyan-300 transition">Escrow &amp; Proof</a>
+            <a href="#disputes" class="block hover:text-cyan-300 transition">Dispute Path</a>
+            <a href="#register" class="block hover:text-cyan-300 transition">18+ Registration</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white">Payouts</h4>
+          <div class="mt-4 space-y-3 text-sm text-slate-400">
+            <p>OPay</p>
+            <p>PalmPay</p>
+            <p>Moniepoint</p>
+            <p>Nigerian Commercial Banks</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <p class="text-xs text-slate-500">© 2026 ChopArena. All rights reserved. 18+ only. Play responsibly.</p>
+        <p class="text-xs text-slate-500">Fees: 10% on 1v1 lock-in stakes • 20% on tournament entry pools before prize payout.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const ticker = document.getElementById('liveTicker');
+    const timerEl = document.getElementById('matchTimer');
+
+    const messages = [
+      'Escrow confirmed for Tunde_FC vs Klevus — ₦5,000 locked.',
+      'Both players confirmed match code CHOP-DLS-88412.',
+      'Screenshot window open — two proofs required for payout.',
+      'Winner receives ₦4,500 after 10% ChopArena fee.',
+      'Payout channel linked: OPay • Average transfer time 42s.'
+    ];
+
+    let messageIndex = 0;
+    let seconds = 4 * 60 + 12;
+
+    function updateTimer() {
+      seconds -= 1;
+      if (seconds < 0) {
+        seconds = 6 * 60 + 30;
+      }
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      if (timerEl) timerEl.textContent = `${m}:${s}`;
+    }
+
+    function rotateTicker() {
+      if (!ticker) return;
+      messageIndex = (messageIndex + 1) % messages.length;
+      ticker.classList.remove('ticker-fade');
+      void ticker.offsetWidth;
+      ticker.textContent = messages[messageIndex];
+      ticker.classList.add('ticker-fade');
+    }
+
+    setInterval(updateTimer, 1000);
+    setInterval(rotateTicker, 4200);
+
+    const form = document.getElementById('registerForm');
+    const toast = document.getElementById('formToast');
+
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const ageCheck = document.getElementById('ageCheck');
+        if (!ageCheck.checked) {
+          alert('Please confirm that you are 18 or older.');
+          return;
+        }
+
+        toast.classList.remove('hidden');
+        form.reset();
+
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 7000);
+      });
+    }
+  </script>
+</body>
+</html>
